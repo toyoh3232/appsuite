@@ -1,0 +1,46 @@
+QT += core network gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+INCLUDEPATH += ../common
+DESTDIR = ../app
+
+RESOURCES += ../languages/translations.qrc
+
+CONFIG(debug, debug|release) {
+        LIBS += -L../common/debug
+        TARGET = cot-hostd
+        LIBS += -lcommond
+        } else {
+        TARGET = cot-host
+        LIBS += -L../common/release
+        LIBS += -lcommon
+}
+
+# Win32 Settings
+win32-g++ {
+RC_FILE +=  cot-host.exe.rc
+}
+
+win32-msvc* {
+CONFIG += embed_manifest_exe
+QMAKE_LFLAGS_WINDOWS += $$quote( /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\" )
+RC_ICONS = icon.ico
+}
+
+SOURCES += \
+    HostSettingsWizardPage.cpp \
+    MainWindow.cpp \
+    TargetSettingsWizardPage.cpp \
+    TestSettingsWizard.cpp \
+    cot-host.cpp
+
+HEADERS += \
+    HostSettingsWizardPage.h \
+    MainWindow.h \
+    TargetSettingsWizardPage.h \
+    TestSettingsWizard.h
+
+FORMS += \
+    HostSettingsWizardPage.ui \
+    MainWindow.ui \
+    TargetSettingsWizardPage.ui \
+    TestSettingsWizard.ui
