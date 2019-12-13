@@ -3,6 +3,13 @@
 
 #include "TcpServer.h"
 
+TcpServer::TcpServer() :
+    QTcpServer(nullptr)
+{
+    connect(this, &QTcpServer::newConnection, this, &TcpServer::response);
+}
+
+
 void TcpServer::listen(SettingsEntity local)
 {
     QTcpServer::listen(QHostAddress(local.ip), local.port);
@@ -10,15 +17,16 @@ void TcpServer::listen(SettingsEntity local)
 
 void TcpServer::response()
 {
-    if (hasPendingConnections())
+    auto socket = nextPendingConnection();
+    QDataStream stream(socket);
+    stream.startTransaction();
+    if (!stream.commitTransaction())
+        return;
+    quint16 command;
+    stream >> command;
+    switch(command)
     {
-        auto socket = nextPendingConnection();
-        QDataStream stream(socket);
-        int c;
-        stream >> c;
-        switch(c)
-        {
-            case 1: stream << "Windows 7";
-        }
+    case 1:
+        stream << "Windows 7";
     }
 }

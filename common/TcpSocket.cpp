@@ -16,7 +16,7 @@ SettingsEntity TcpSocket::request(RequestType type)
     switch (type)
     {
     case  ASK_INFOMATION:
-        stream << 1;
+        stream << (quint16) 1;
         if (waitForReadyRead())
         {
             stream >> se.os;

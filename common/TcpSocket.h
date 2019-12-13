@@ -13,6 +13,7 @@ public:
     TcpSocket() = default;
     void connect(SettingsEntity server);
     SettingsEntity request(RequestType type);
+
 public:
     static TcpSocket* sendWOL(SettingsEntity target, int timeOut);
 };

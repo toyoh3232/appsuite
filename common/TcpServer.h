@@ -11,10 +11,13 @@
 
 class TcpServer : private QTcpServer
 {
+    Q_OBJECT
 public:
-    TcpServer() = default;
+    TcpServer();
 public:
     void listen(SettingsEntity local);
+
+public slots:
     void response();
 };
 
