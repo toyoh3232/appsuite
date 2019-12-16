@@ -10,8 +10,8 @@ enum RequestType {ASK_INFOMATION = 1};
 class TcpSocket : private QTcpSocket
 {
 public:
-    TcpSocket() = default;
-    void connect(SettingsEntity server);
+    TcpSocket();
+    void connectTo(SettingsEntity server);
     SettingsEntity request(RequestType type);
 
 public:

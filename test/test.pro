@@ -5,6 +5,16 @@ QT += network
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
+CONFIG(debug, debug|release) {
+        LIBS += -L../common/debug
+        TARGET = testd
+        LIBS += -lcommond
+        } else {
+        TARGET = test
+        LIBS += -L../common/release
+        LIBS += -lcommon
+}
+
 INCLUDEPATH += ../common
 DESTDIR = ../app
 

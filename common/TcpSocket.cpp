@@ -4,24 +4,27 @@
 
 #include "TcpSocket.h"
 
-void TcpSocket::connect(SettingsEntity server)
+TcpSocket::TcpSocket() :
+    QTcpSocket()
+{
+
+}
+
+void TcpSocket::connectTo(SettingsEntity server)
 {
     connectToHost(QHostAddress(server.ip), server.port);
 }
 
 SettingsEntity TcpSocket::request(RequestType type)
 {
+    QByteArray array;
     QDataStream stream(this);
     SettingsEntity se;
     switch (type)
     {
     case  ASK_INFOMATION:
-        stream << (quint16) 1;
-        if (waitForReadyRead())
-        {
-            stream >> se.os;
-            this->close();
-        }
+        stream << QString("Hello");
+        waitForReadyRead(-1);
         break;
     }
     return se;
@@ -46,7 +49,7 @@ TcpSocket* TcpSocket::sendWOL(SettingsEntity target, int timeOut)
 	QUdpSocket udpSocket;
     udpSocket.writeDatagram(magic, QHostAddress::Broadcast, 45454);
     auto socket = new TcpSocket;
-    socket->connect(target);
+    socket->connectTo(target);
     socket->waitForConnected(timeOut*1000);
     return socket;
 }

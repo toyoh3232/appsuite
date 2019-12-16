@@ -14,7 +14,6 @@ int main(int argc, char *argv[])
         qDebug() << "Server";
         TcpServer server;
         server.listen(se);
-
         return a.exec();
 
     }
@@ -22,7 +21,7 @@ int main(int argc, char *argv[])
     {
         qDebug() << "Client";
         TcpSocket socket;
-        socket.connect(se);
+        socket.connectTo(se);
         se = socket.request(RequestType::ASK_INFOMATION);
         qDebug() << se.os;
         return 0;
