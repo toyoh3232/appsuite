@@ -1,8 +1,21 @@
 #ifndef SETTINGSENTITY_H
 #define SETTINGSENTITY_H
 #include <QString>
+#include <QDataStream>
 
-enum class ExperimentType {FULLY_EQUIPPED_RUNNING, ONOFF_LOOP_TEST};
+enum class RequestType : qint16
+{
+    ASK_INFOMATION
+};
+
+QDataStream& operator<< (QDataStream& stream, RequestType type);
+QDataStream& operator>> (QDataStream& stream, RequestType& type);
+
+enum class ExperimentType
+{
+    FULLY_EQUIPPED_RUNNING,
+    ONOFF_LOOP_TEST
+};
 
 struct SettingsEntity
 {

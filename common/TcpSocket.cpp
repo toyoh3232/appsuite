@@ -13,21 +13,25 @@ TcpSocket::TcpSocket() :
 void TcpSocket::connectTo(SettingsEntity server)
 {
     connectToHost(QHostAddress(server.ip), server.port);
+
 }
 
-SettingsEntity TcpSocket::request(RequestType type)
+void TcpSocket::request(RequestType type)
 {
-    QByteArray array;
-    QDataStream stream(this);
-    SettingsEntity se;
-    switch (type)
+    QByteArray data;
+    QDataStream out(&data, QIODevice::ReadWrite);
+    out << type;
+    this->write(data);
+    connect(this, &QIODevice::readyRead,[&]
     {
-    case  ASK_INFOMATION:
-        stream << QString("Hello");
-        waitForReadyRead(-1);
-        break;
-    }
-    return se;
+        QDataStream in(this);
+        QString os;
+        in.startTransaction();
+        in >> os;
+        if (!in.commitTransaction())
+            return;
+        qDebug() << os;
+    });
 }
 
 TcpSocket* TcpSocket::sendWOL(SettingsEntity target, int timeOut)

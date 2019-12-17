@@ -5,14 +5,14 @@
 
 #include "SettingsEntity.h"
 
-enum RequestType {ASK_INFOMATION = 1};
-
 class TcpSocket : private QTcpSocket
 {
+    Q_OBJECT
+
 public:
     TcpSocket();
     void connectTo(SettingsEntity server);
-    SettingsEntity request(RequestType type);
+    void request(RequestType type);
 
 public:
     static TcpSocket* sendWOL(SettingsEntity target, int timeOut);

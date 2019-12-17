@@ -24,6 +24,7 @@ SOURCES +=  \
     ErrorHandler.cpp \
     Logger.cpp \
     NetworkInterface.cpp \
+    SettingsEntity.cpp \
     TcpServer.cpp \
     TcpSocket.cpp \
     TextEditIODevice.cpp \

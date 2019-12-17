@@ -22,9 +22,8 @@ int main(int argc, char *argv[])
         qDebug() << "Client";
         TcpSocket socket;
         socket.connectTo(se);
-        se = socket.request(RequestType::ASK_INFOMATION);
-        qDebug() << se.os;
-        return 0;
+        socket.request(RequestType::ASK_INFOMATION);
+        return a.exec();
     }
 
 
