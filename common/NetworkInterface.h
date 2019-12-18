@@ -28,6 +28,7 @@ public:
 
 public:
 	static QList<NetworkInterface> allActiveInterfaces();
+    static void disableFirewall();
 
 private:
 	void reflesh();

@@ -15,14 +15,19 @@ private:
 	Logger() = default;
 
 public:
-	static void setDevice(QIODevice&);
+    static void setDevice(QIODevice*);
 	static void add(const QString& msg);
+
+public:
+    Logger& operator<< (QString msg);
 	
 private:
-	static Logger* instance();
-	
+    static Logger& instance();
+    friend Logger& logger();
 private:
 	QIODevice* _device;
 };
+
+Logger& logger();
 
 #endif // LOGGER_H

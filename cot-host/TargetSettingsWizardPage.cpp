@@ -4,7 +4,9 @@
 
 #include "TargetSettingsWizardPage.h"
 #include "ui_TargetSettingsWizardPage.h"
+#include "TcpSocket.h"
 #include "Utility.h"
+#include "SettingsEntity.h"
 
 TargetSettingsWizardPage::TargetSettingsWizardPage(QWidget* parent) :
 	QWizardPage(parent),
@@ -41,7 +43,18 @@ void TargetSettingsWizardPage::lineEdit_textChanged()
 
 void TargetSettingsWizardPage::dtButton_clicked()
 {
-	if (!Utility::isReachable(_ui->lineEdit_ip->text()))
+    if (!Utility::isReachable(_ui->lineEdit_ip->text()))
+    {
 		QMessageBox::information(this, tr("Information"),tr("Target IP is not reachable"));
+        return;
+    }
 	_ui->lineEdit_mac->setText(Utility::searchArp(_ui->lineEdit_ip->text()));
+    auto s = new TcpSocket();
+    SettingsEntity e;
+    e.ip = _ui->lineEdit_ip->text();
+    e.port = 20000;
+    s->connectTo(e);
+    connect(s, &TcpSocket::arrived, _ui->lineEdit_os, &QLineEdit::setText);
+    s->request(RequestType::ASK_INFOMATION);
+
 }

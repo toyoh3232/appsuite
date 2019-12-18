@@ -9,7 +9,7 @@ common　　 -　共有ライブラリ（作成中）
 
 cot-host   -　ON/OFF試験のホスト側プログラム　　　（作成中）
 
-cot-target -　ON/OFF試験のターゲット側プログラム　（作成予定）
+cot-target -　ON/OFF試験のターゲット側プログラム　（作成中）
 
 fet-host   -　最大構成試験のホスト側プログラム　　（作成予定）
 

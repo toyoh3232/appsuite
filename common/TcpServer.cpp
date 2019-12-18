@@ -2,30 +2,32 @@
 #include <QDataStream>
 #include <QDebug>
 #include <QByteArray>
+#include "Logger.h"
 
 #include "TcpServer.h"
 
-TcpServer::TcpServer() :
-    QTcpServer(nullptr)
+TcpServer::TcpServer(QObject* parent) :
+    _s(new QTcpServer(parent))
 {
-    connect(this, SIGNAL(newConnection()), this, SLOT(response()));
+    connect(_s, &QTcpServer::newConnection, this, &TcpServer::response);
 }
 
 
 void TcpServer::listen(SettingsEntity local)
 {
-    QTcpServer::listen(QHostAddress(local.ip), local.port);
+    _s->listen(QHostAddress(local.ip), local.port);
+    logger() << "listening";
 }
 
 void TcpServer::response()
 {
-    qDebug() << "connected";
-    auto socket = nextPendingConnection();
-    qDebug() << "iniial stream";
+    logger() << "connected";
+    auto socket = _s->nextPendingConnection();
+    logger() << "iniial stream";
     connect(socket, &QTcpSocket::readyRead, this, [=]
     {
         QDataStream  in(socket);
-        qDebug() << "readyRead";
+        logger() << "readyRead";
         RequestType cmd;
         in.startTransaction();
         in >> cmd;

@@ -7,17 +7,17 @@ RESOURCES += ../languages/translations.qrc
 
 CONFIG(debug, debug|release) {
         LIBS += -L../common/debug
-        TARGET = cot-hostd
+        TARGET = cot-targetd
         LIBS += -lcommond
         } else {
-        TARGET = cot-host
+        TARGET = cot-target
         LIBS += -L../common/release
         LIBS += -lcommon
 }
 
 # Win32 Settings
 win32-g++ {
-RC_FILE +=  cot-host.exe.rc
+RC_FILE +=  cot-target.exe.rc
 }
 
 win32-msvc* {
@@ -26,20 +26,18 @@ QMAKE_LFLAGS_WINDOWS += $$quote( /MANIFESTUAC:\"level=\'requireAdministrator\' u
 RC_ICONS = icon.ico
 }
 
-SOURCES += \
-    HostSettingsWizardPage.cpp \
-    MainWindow.cpp \
-    TargetSettingsWizardPage.cpp \
-    TestSettingsWizard.cpp \
-    cot-host.cpp
+FORMS += \
+    HostSettingsWizardPage.ui \
+    MainWindow.ui
 
 HEADERS += \
     HostSettingsWizardPage.h \
     MainWindow.h \
-    TargetSettingsWizardPage.h \
     TestSettingsWizard.h
 
-FORMS += \
-    HostSettingsWizardPage.ui \
-    MainWindow.ui \
-    TargetSettingsWizardPage.ui
+SOURCES += \
+    HostSettingsWizardPage.cpp \
+    MainWindow.cpp \
+    TestSettingsWizard.cpp \
+    cot-target.cpp
+

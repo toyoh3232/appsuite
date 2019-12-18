@@ -1,25 +1,30 @@
-#include <QtConcurrentRun>
 #include <QtGlobal>
 #include "Logger.h"
 
-static void write(QIODevice* device, const QString msg)
-{
-	device->write(qUtf8Printable(msg));
-}
-
-Logger* Logger::instance()
+Logger& Logger::instance()
 {
 	static Logger logger;
-	return &logger;
+    return logger;
 }
 
-void Logger::setDevice(QIODevice& device)
+void Logger::setDevice(QIODevice* device)
 {
-	instance()->_device = &device;
+    instance()._device = device;
 }
 
 void Logger::add(const QString& msg)
 {
-	if (instance()->_device != nullptr)
-		QFuture<void> future = QtConcurrent::run(write, instance()->_device, msg);
+    if (instance()._device != nullptr)
+        instance()._device->write(qUtf8Printable(msg));
+}
+
+Logger& Logger::operator<<(QString msg)
+{
+    add(msg);
+    return *this;
+}
+
+Logger& logger()
+{
+    return Logger::instance();
 }

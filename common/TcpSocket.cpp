@@ -1,19 +1,20 @@
 #include <QByteArray>
 #include <QUdpSocket>
 #include <QDataStream>
+#include "Logger.h"
 
 #include "TcpSocket.h"
 
 TcpSocket::TcpSocket() :
-    QTcpSocket()
+   _s(new QTcpSocket)
 {
-
+    connect(_s, &QTcpSocket::connected, this,[]{logger() << "server connected";} );
+    connect(this,&TcpSocket::arrived,this, [](QString s){logger() << "data arrived" << s;});
 }
 
 void TcpSocket::connectTo(SettingsEntity server)
 {
-    connectToHost(QHostAddress(server.ip), server.port);
-
+    _s->connectToHost(QHostAddress(server.ip), server.port);
 }
 
 void TcpSocket::request(RequestType type)
@@ -21,20 +22,21 @@ void TcpSocket::request(RequestType type)
     QByteArray data;
     QDataStream out(&data, QIODevice::ReadWrite);
     out << type;
-    this->write(data);
-    connect(this, &QIODevice::readyRead,[&]
+    _s->write(data);
+    connect(_s, &QIODevice::readyRead,[=]
     {
-        QDataStream in(this);
-        QString os;
+        QDataStream in(_s);
+        SettingsEntity e;
         in.startTransaction();
-        in >> os;
+        in >> e.os;
         if (!in.commitTransaction())
             return;
-        qDebug() << os;
+        qDebug() << e.os;
+        emit arrived(e.os);
     });
 }
 
-TcpSocket* TcpSocket::sendWOL(SettingsEntity target, int timeOut)
+void TcpSocket::sendWOL(SettingsEntity target, int timeOut)
 {
 	// build magic packet
 	QByteArray magic;
@@ -52,8 +54,5 @@ TcpSocket* TcpSocket::sendWOL(SettingsEntity target, int timeOut)
 	// use udpSocket to broadcast magic packet
 	QUdpSocket udpSocket;
     udpSocket.writeDatagram(magic, QHostAddress::Broadcast, 45454);
-    auto socket = new TcpSocket;
-    socket->connectTo(target);
-    socket->waitForConnected(timeOut*1000);
-    return socket;
+    udpSocket.close();
 }

@@ -8,7 +8,8 @@
 #include "HostSettingsWizardPage.h"
 #include "ui_HostSettingsWizardPage.h"
 
-#include "TestSettingsWizard.h"
+#include "Wizard.h"
+#include "SettingsEntity.h"
 
 #define OLDSTYLE "background-color: rgb(240, 240, 240);"
 #define NEWSTYLE "background-color: rgb(240, 240, 240); color: rgb(255, 0, 0);"
@@ -33,6 +34,7 @@ HostSettingsWizardPage::HostSettingsWizardPage(QWidget *parent) :
 	_ui->lineEdit_sm->setPlaceholderText("0.0.0.0");
 	_ui->lineEdit_dg->setPlaceholderText(tr("not necessary"));
 
+    registerField("host_ip",_ui->lineEdit_oldip);
 	connect(_ui->pushButton_lock, &QPushButton::clicked, this, &HostSettingsWizardPage::lockButton_click);
 	connect(_ui->pushButton_set, &QPushButton::clicked, this, &HostSettingsWizardPage::setButton_click);
 	

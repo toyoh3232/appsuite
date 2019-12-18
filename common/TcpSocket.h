@@ -5,17 +5,23 @@
 
 #include "SettingsEntity.h"
 
-class TcpSocket : private QTcpSocket
+class TcpSocket : public QObject
 {
     Q_OBJECT
 
 public:
-    TcpSocket();
+    explicit TcpSocket();
     void connectTo(SettingsEntity server);
     void request(RequestType type);
 
+signals:
+    void arrived(QString e);
+
 public:
-    static TcpSocket* sendWOL(SettingsEntity target, int timeOut);
+    static void sendWOL(SettingsEntity target, int timeOut);
+
+private:
+    QTcpSocket* _s;
 };
 
 #endif/*TCPSOCKET_H*/

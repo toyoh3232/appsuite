@@ -5,7 +5,7 @@
 #include <QWidget>
 
 namespace Ui{
-	class TargetSettingsWizardPage;
+    class TargetSettingsWizardPage;
 }
 
 class TargetSettingsWizardPage : public QWizardPage

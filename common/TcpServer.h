@@ -9,16 +9,19 @@
 #include "TcpSocket.h"
 #include "SettingsEntity.h"
 
-class TcpServer : private QTcpServer
+class TcpServer : public QObject
 {
     Q_OBJECT
 public:
-    TcpServer();
+    TcpServer(QObject* parent=nullptr);
 public:
     void listen(SettingsEntity local);
 
 public slots:
     void response();
+
+private:
+    QTcpServer* _s;
 };
 
 #endif  /*TCPSERVER_H*/

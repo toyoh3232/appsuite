@@ -1,12 +1,11 @@
 #ifndef TESTSETINGSWIZARD_H
 #define TESTSETINGSWIZARD_H
 
-#include <QtWidgets/QWizard>
 #include "Wizard.h"
 
 class TestSettingsWizard : public Wizard
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
 	enum {Page_HostSettings, Page_TargetSettings};

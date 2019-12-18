@@ -20,19 +20,17 @@ QString NetworkInterface::errorModuleName()
 
 QList<NetworkInterface> NetworkInterface::allActiveInterfaces()
 {
-	Logger::add("start getting nic info...\n");
+    logger() << "start getting nic info...";
 	QList<NetworkInterface> qlist;
 	int n = 0;
 	foreach(QNetworkInterface netInterface, QNetworkInterface::allInterfaces())
 	{
-		Logger::add(QString("scanning number %1 nic...").arg(n));
+        logger() << QString("scanning number %1 nic...").arg(n);
 		if (!(netInterface.flags() & QNetworkInterface::IsLoopBack) && netInterface.flags() & QNetworkInterface::IsUp)
 		{
 			
 			qlist.append(NetworkInterface(netInterface));
-			Logger::add("active");
 		}
-		Logger::add("\n");
 		n++;
 	}
 	return qlist;
@@ -132,5 +130,12 @@ void NetworkInterface::reflesh()
 	}
 }
 
+void NetworkInterface::disableFirewall()
+{
+    QString cmd = "netsh advfirewall set currentprofile state off";
+    logger() << "check/disable firewall";
+    Utility::execCommand(cmd);
+
+}
 
 
