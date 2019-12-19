@@ -20,6 +20,8 @@ public:
 
 public:
     Logger& operator<< (QString msg);
+    Logger& operator<< (bool b);
+    Logger& operator<<(const char* c);
 	
 private:
     static Logger& instance();

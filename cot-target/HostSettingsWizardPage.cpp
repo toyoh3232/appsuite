@@ -150,7 +150,7 @@ void HostSettingsWizardPage::setButton_click()
 		msgBox->setIcon(QMessageBox::Information);
 		msgBox->setText(tr("please wait for 3 secs..."));
 		msgBox->setStandardButtons(QMessageBox::NoButton);
-		QTimer::singleShot(3000, msgBox, SLOT(hide()));
+        QTimer::singleShot(3000, msgBox, SLOT(hide()));
 		msgBox->exec();
 		setStyle(_ui->groupBox_oldset, "QLineEdit", NEWSTYLE);
 		emit this->completeChanged();

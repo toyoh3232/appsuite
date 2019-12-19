@@ -20,6 +20,8 @@ public:
 
 private slots:
 	void newSettings();
+protected:
+    void showEvent(QShowEvent* event) override;
 
 private:
 	Ui::MainWindow* _ui;

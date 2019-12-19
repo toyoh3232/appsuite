@@ -3,6 +3,7 @@ CONFIG += staticlib
 QT += core network concurrent
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+
 CONFIG(debug, debug|release) {
 	TARGET = commond
 	} else {
@@ -13,6 +14,7 @@ HEADERS +=  \
     ErrorHandler.h \
     Logger.h \
     NetworkInterface.h \
+    RunGuard.h \
     SettingsEntity.h \
     TcpServer.h \
     TcpSocket.h \
@@ -25,6 +27,7 @@ SOURCES +=  \
     ErrorHandler.cpp \
     Logger.cpp \
     NetworkInterface.cpp \
+    RunGuard.cpp \
     SettingsEntity.cpp \
     TcpServer.cpp \
     TcpSocket.cpp \

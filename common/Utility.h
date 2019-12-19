@@ -1,5 +1,5 @@
-#ifndef WOLWOLUtility_H
-#define WOLWOLUtility_H
+#ifndef Utility_H
+#define Utility_H
 
 #include <QString>
 #include <QTextStream>
@@ -16,4 +16,4 @@ public:
 	Utility() = delete;
 };
 
-#endif //WOLWOLUtility_H
+#endif //Utility_H

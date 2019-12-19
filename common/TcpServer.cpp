@@ -2,6 +2,7 @@
 #include <QDataStream>
 #include <QDebug>
 #include <QByteArray>
+#include <QSysInfo>
 #include "Logger.h"
 
 #include "TcpServer.h"
@@ -16,33 +17,34 @@ TcpServer::TcpServer(QObject* parent) :
 void TcpServer::listen(SettingsEntity local)
 {
     _s->listen(QHostAddress(local.ip), local.port);
-    logger() << "listening";
+    logger() << QString("starting server on %1:%2").arg(local.ip).arg(local.port);
 }
 
 void TcpServer::response()
 {
-    logger() << "connected";
     auto socket = _s->nextPendingConnection();
-    logger() << "iniial stream";
+    logger() << QString("client %1 connected").arg(socket->peerAddress().toString());
     connect(socket, &QTcpSocket::readyRead, this, [=]
     {
         QDataStream  in(socket);
-        logger() << "readyRead";
         RequestType cmd;
         in.startTransaction();
         in >> cmd;
         if (!in.commitTransaction())
             return;
+        logger() << "remote command received";
         QByteArray data;
         QDataStream out(&data, QIODevice::ReadWrite);
         switch (cmd)
         {
             case RequestType::ASK_INFOMATION:
-                qDebug() << "readyWrite";
-                in << QString("Window 7");
+                logger() << "sending OS info";
+                in << QSysInfo::prettyProductName();
                 break;
         }
         socket->write(data);
+        socket->close();
+        socket->deleteLater();
     });
 }
 
