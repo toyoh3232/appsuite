@@ -21,7 +21,6 @@ signals:
 private:
     QSharedMemory _sharedMem;
 
-
 };
 
 #endif // RUNNINGGUARD_H

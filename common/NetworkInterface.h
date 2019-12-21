@@ -21,6 +21,7 @@ public:
 	QString macAddr() const;
 	QString netmask() const;
 	QString name() const;
+    QString deviceName() const;
 	ErrorHandler* setWOLPowerReady();
 
 public: 
@@ -32,9 +33,12 @@ public:
 
 private:
 	void reflesh();
+    void setDeviceName();
 	
 private:
-	QNetworkInterface _interface;
+    QNetworkInterface _interface;
+private:
+    QString _deviceName;
 };
 
 

@@ -56,7 +56,7 @@ void HostSettingsWizardPage::initializePage()
 	_interfaces = NetworkInterface::allActiveInterfaces();
 	foreach (NetworkInterface interface, _interfaces)
 	{
-		_ui->comboBox->addItem(interface.name());
+        _ui->comboBox->addItem(interface.deviceName(), QVariant(interface.name()));
 	}
     _ui->comboBox->setEnabled(true);
 	_ui->pushButton_lock->setEnabled(true);
@@ -150,11 +150,15 @@ void HostSettingsWizardPage::setButton_click()
 		msgBox->setIcon(QMessageBox::Information);
 		msgBox->setText(tr("please wait for 3 secs..."));
 		msgBox->setStandardButtons(QMessageBox::NoButton);
+        msgBox->show();
         QTimer::singleShot(3000, msgBox, SLOT(hide()));
-		msgBox->exec();
-		setStyle(_ui->groupBox_oldset, "QLineEdit", NEWSTYLE);
-		emit this->completeChanged();
-		emit _ui->pushButton_lock->clicked();
+        QTimer::singleShot(3200,this,[=]
+                           {
+                               setStyle(_ui->groupBox_oldset, "QLineEdit", NEWSTYLE);
+                               emit this->completeChanged();
+                               emit _ui->pushButton_lock->clicked();
+                           });
+
 		
 		
 	}

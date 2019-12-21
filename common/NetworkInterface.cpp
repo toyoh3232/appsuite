@@ -1,5 +1,7 @@
 #include <QtNetwork>
 #include <QList>
+#include <QSettings>
+#include <QRegularExpression>
 
 #include "NetworkInterface.h"
 #include "Utility.h"
@@ -9,7 +11,8 @@ NetworkInterface::NetworkInterface(QNetworkInterface& qinterface) :
 	ErrorHandler(),
 	_interface(qinterface)
 {
-	/*no need to implement*/
+    logger() << "construct";
+    setDeviceName();
 }
 
 
@@ -87,7 +90,12 @@ QString NetworkInterface::macAddr() const
 
 QString NetworkInterface::name() const
 {
-	return _interface.humanReadableName();
+    return _interface.humanReadableName();
+}
+
+QString NetworkInterface::deviceName() const
+{
+    return _deviceName;
 }
 
 QString NetworkInterface::netmask() const
@@ -136,6 +144,27 @@ void NetworkInterface::disableFirewall()
     logger() << "check/disable firewall";
     Utility::execCommand(cmd);
 
+}
+
+void NetworkInterface::setDeviceName()
+{
+    QSettings settings("HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e972-e325-11ce-bfc1-08002be10318}", QSettings::NativeFormat);
+    QRegularExpression rx("\\d+");
+    QString name = _interface.name();
+    auto it = rx.globalMatch(name);
+    int id = 0;
+    if (it.hasNext())
+    {
+        auto match = it.next();
+        if (match.hasMatch())
+            id = match.captured(0).toInt();
+    }
+    logger() << id;
+    foreach(auto key , settings.childGroups() )
+    {
+        if (settings.value(key+"/NetLuidIndex", QSettings::NativeFormat).toInt() == id)
+            _deviceName = settings.value(key+"/DriverDesc", QSettings::NativeFormat).toString();
+    }
 }
 
 
