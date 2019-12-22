@@ -6,8 +6,12 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG(debug, debug|release) {
 	TARGET = commond
+	DESTDIR = debug
+	OBJECTS_DIR = debug
 	} else {
 	TARGET = common
+	DESTDIR = release
+	OBJECTS_DIR = release
 }
 
 HEADERS +=  \

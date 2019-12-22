@@ -9,10 +9,12 @@ CONFIG(debug, debug|release) {
         LIBS += -L../common/debug
         TARGET = testd
         LIBS += -lcommond
+		OBJECTS_DIR = debug
         } else {
         TARGET = test
         LIBS += -L../common/release
         LIBS += -lcommon
+		OBJECTS_DIR = release
 }
 
 win32-g++ {

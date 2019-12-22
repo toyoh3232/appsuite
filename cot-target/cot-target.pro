@@ -9,10 +9,12 @@ CONFIG(debug, debug|release) {
         LIBS += -L../common/debug
         TARGET = cot-targetd
         LIBS += -lcommond
+		OBJECTS_DIR = debug
         } else {
         TARGET = cot-target
         LIBS += -L../common/release
         LIBS += -lcommon
+		OBJECTS_DIR = release
 }
 
 # Win32 Settings
