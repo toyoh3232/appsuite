@@ -7,7 +7,7 @@
 #include <QTextStream>
 
 #include "TcpSocket.h"
-#include "SettingsEntity.h"
+#include "Settings.h"
 
 class TcpServer : public QObject
 {

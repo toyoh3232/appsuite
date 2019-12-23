@@ -1,22 +1,19 @@
 #ifndef RUNNINGGUARD_H
 #define RUNNINGGUARD_H
 
-#include <QObject>
 #include <QSharedMemory>
+#include <QMessageBox>
+#include <QCoreApplication>
 
-class RunGuard : public QObject
+class RunGuard
 {
-    Q_OBJECT
+
 private:
     RunGuard(QString key);
 
 public:
-    static RunGuard* instance();
-    void run();
-    QString msg();
-
-signals:
-    void recreated(QString errMsg);
+    static RunGuard& instance();
+    bool isNewRun();
 
 private:
     QSharedMemory _sharedMem;

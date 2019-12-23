@@ -17,14 +17,14 @@ CONFIG(debug, debug|release) {
 		OBJECTS_DIR = release
 }
 
-win32-g++ {
-RC_FILE +=  test.exe.rc
-}
+# win32-g++ {
+# RC_FILE +=  test.exe.rc
+# }
 
-win32-msvc* {
-CONFIG += embed_manifest_exe
-QMAKE_LFLAGS_WINDOWS += $$quote( /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\" )
-}
+# win32-msvc* {
+# CONFIG += embed_manifest_exe
+# QMAKE_LFLAGS_WINDOWS += $$quote( /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\" )
+# }
 
 INCLUDEPATH += ../common
 DESTDIR = ../app

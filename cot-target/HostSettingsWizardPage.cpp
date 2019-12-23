@@ -8,17 +8,14 @@
 #include "HostSettingsWizardPage.h"
 #include "ui_HostSettingsWizardPage.h"
 
-#include "Wizard.h"
-#include "SettingsEntity.h"
+#include "TestSettingsWizard.h"
 
 #define OLDSTYLE "background-color: rgb(240, 240, 240);"
 #define NEWSTYLE "background-color: rgb(240, 240, 240); color: rgb(255, 0, 0);"
 
 HostSettingsWizardPage::HostSettingsWizardPage(QWidget *parent) :
 	QWizardPage(parent),
-	_ui(new Ui::HostSettingsWizardPage),
-	_interface(nullptr),
-	_interfaces( )
+    _ui(new Ui::HostSettingsWizardPage)
 {
 	_ui->setupUi(this);
 	QString ipRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
@@ -34,7 +31,6 @@ HostSettingsWizardPage::HostSettingsWizardPage(QWidget *parent) :
 	_ui->lineEdit_sm->setPlaceholderText("0.0.0.0");
 	_ui->lineEdit_dg->setPlaceholderText(tr("not necessary"));
 
-    registerField("host_ip",_ui->lineEdit_oldip);
 	connect(_ui->pushButton_lock, &QPushButton::clicked, this, &HostSettingsWizardPage::lockButton_click);
 	connect(_ui->pushButton_set, &QPushButton::clicked, this, &HostSettingsWizardPage::setButton_click);
 	
@@ -53,10 +49,9 @@ HostSettingsWizardPage::~HostSettingsWizardPage()
 
 void HostSettingsWizardPage::initializePage()
 {
-	_interfaces = NetworkInterface::allActiveInterfaces();
-	foreach (NetworkInterface interface, _interfaces)
-	{
-        _ui->comboBox->addItem(interface.deviceName(), QVariant(interface.name()));
+    foreach (NetworkInterface interface, NetworkInterface::allActiveInterfaces())
+    {
+        _ui->comboBox->addItem(interface.deviceName(), QVariant(interface.index()));
 	}
     _ui->comboBox->setEnabled(true);
 	_ui->pushButton_lock->setEnabled(true);
@@ -75,15 +70,10 @@ void HostSettingsWizardPage::lockButton_click()
 	_ui->comboBox->setEnabled(false);
 	_ui->pushButton_lock->setEnabled(false);
 
-	//get newest interface by name
-	_interfaces = NetworkInterface::allActiveInterfaces();
-	for (int i=0;i<_interfaces.count();i++)
-	{
-		if (_interfaces[i].name() == _ui->comboBox->currentText())
-			_interface = &_interfaces[i];
-	}
-	_ui->lineEdit_oldip->setText(_interface->ipv4Addr());
-	_ui->lineEdit_oldsm->setText(_interface->netmask());
+    //get newest interface by name
+    auto nic = NetworkInterface::interfaceFromIndex(_ui->comboBox->currentData().toInt());
+    _ui->lineEdit_oldip->setText(nic.ipv4Addr());
+    _ui->lineEdit_oldsm->setText(nic.netmask());
 	
 	clearText(_ui->groupBox_newset, "QLineEdit");
 	setHidden(_ui->groupBox_newset,false);
@@ -141,7 +131,8 @@ void HostSettingsWizardPage::setButton_click()
 	QString ip      = _ui->lineEdit_ip->text();
 	QString mask    = _ui->lineEdit_sm->text();
 	QString gateway = _ui->lineEdit_dg->text();
-	ErrorHandler* handler = _interface->setIpv4Property(ip, mask,gateway);
+    auto nic = NetworkInterface::interfaceFromIndex(_ui->comboBox->currentData().toInt());
+    ErrorHandler* handler = nic.setIpv4Property(ip, mask,gateway);
 	if (handler == nullptr)
 	{
 		
@@ -156,6 +147,7 @@ void HostSettingsWizardPage::setButton_click()
                            {
                                setStyle(_ui->groupBox_oldset, "QLineEdit", NEWSTYLE);
                                emit this->completeChanged();
+                               this->wizard()->button(QWizard::WizardButton::CancelButton)->setEnabled(false);
                                emit _ui->pushButton_lock->clicked();
                            });
 

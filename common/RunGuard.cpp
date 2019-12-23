@@ -1,4 +1,4 @@
-#include <QCoreApplication>
+
 #include <QFileInfo>
 
 #include "RunGuard.h"
@@ -10,17 +10,18 @@ RunGuard::RunGuard(QString key) :
 
 }
 
-RunGuard* RunGuard::instance()
+RunGuard& RunGuard::instance()
 {
-    static RunGuard rg(QFileInfo(QCoreApplication::applicationFilePath()).fileName());
-    return &rg;
+    static RunGuard rg(QCoreApplication::applicationName());
+    return rg;
 }
 
-void RunGuard::run()
+bool RunGuard::isNewRun()
 {
    if(!_sharedMem.create(1))
    {
        logger() << "error";
-       emit recreated(tr("Another program instance is already running!"));
+       return false;
    }
+   return true;
 }

@@ -14,17 +14,12 @@ MainWindow::MainWindow(QWidget* parent) :
 	_wizard(new TestSettingsWizard(this))
 {
 	_ui->setupUi(this);
-    connect(_ui->pushButton_st,&QPushButton::clicked, this, &MainWindow::newSettings);
+    connect(_ui->pushButton_set,&QPushButton::clicked, this, &MainWindow::buttonSet_click);
 	connect(_ui->pushButton_exit,&QPushButton::clicked, this, &QWidget::close);
     //initialize logger
     auto logDevice = new TextEditIODevice(_ui->textEdit_lg,this);
     Logger::setDevice(logDevice);
     // initialize running guard
-    connect(RunGuard::instance(), &RunGuard::recreated,[=](QString errMsg)
-    {
-        QMessageBox::critical(this,"", errMsg);
-        QTimer::singleShot(0, this, &MainWindow::close);
-    });
 
 }
 
@@ -34,14 +29,9 @@ MainWindow::~MainWindow()
 	delete _wizard;
 }
 
-void MainWindow::newSettings()
+void MainWindow::buttonSet_click()
 {
 	_wizard->setWindowModality(Qt::WindowModal);
 	_wizard->show();
 }
 
-void MainWindow::showEvent(QShowEvent *event)
-{
-    RunGuard::instance()->run();
-    QWidget::showEvent(event);
-}

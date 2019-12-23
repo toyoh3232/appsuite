@@ -7,7 +7,7 @@
 #include "Utility.h"
 #include "Logger.h"
 
-NetworkInterface::NetworkInterface(QNetworkInterface& qinterface) : 
+NetworkInterface::NetworkInterface(const QNetworkInterface& qinterface) :
 	ErrorHandler(),
 	_interface(qinterface)
 {
@@ -167,4 +167,13 @@ void NetworkInterface::setDeviceName()
     }
 }
 
+int NetworkInterface::index()
+{
+    return _interface.index();
+}
+
+NetworkInterface NetworkInterface::interfaceFromIndex(int index)
+{
+   return NetworkInterface(QNetworkInterface::interfaceFromIndex(index));
+}
 

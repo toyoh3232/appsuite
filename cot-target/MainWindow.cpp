@@ -1,9 +1,11 @@
 #include <QMessageBox>
 #include <QTimer>
+#include <QBitmap>
 
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "Logger.h"
+#include "Settings.h"
 #include "TextEditIODevice.h"
 #include "RunGuard.h"
 
@@ -14,25 +16,21 @@ MainWindow::MainWindow(QWidget* parent) :
     _s(new TcpServer(this))
 {
 	_ui->setupUi(this);
-    connect(_ui->pushButton_st,&QPushButton::clicked, this, &MainWindow::newSettings);
-	connect(_ui->pushButton_exit,&QPushButton::clicked, this, &QWidget::close);
+    // set button click event
+    connect(_ui->pushButton_set, &QPushButton::clicked, this, &MainWindow::setButton_click);
+    connect(_ui->pushButton_exit, &QPushButton::clicked, this, &QWidget::close);
+    connect(_ui->pushButton_start, &QPushButton::clicked, this, &MainWindow::startButton_click);
     connect(_w->button(QWizard::WizardButton::FinishButton), &QAbstractButton::clicked,[=]
     {
-        _ui->pushButton_st->setEnabled(false);
-        SettingsEntity e;
-        e.port= 20000;
-        e.ip = "127.0.0.1";
- //     e.ip = _w->field("host_ip").toString();
-        _s->listen(e);
+        _ui->pushButton_set->setEnabled(false);
+        _ui->pushButton_start->setEnabled(true);
     });
-    auto logDevice = new TextEditIODevice(_ui->textEdit_lg,this);
+    // initalize settings
+    if (Settings::instance().isNew())
+        emit _ui->pushButton_set->clicked();
+    // initialize logger
+    auto logDevice = new TextEditIODevice(_ui->textEdit_lg, this);
     Logger::setDevice(logDevice);
-    // initialize running guard
-    connect(RunGuard::instance(), &RunGuard::recreated,[=](QString errMsg)
-    {
-        QMessageBox::critical(this, "", errMsg);
-        QTimer::singleShot(0, this, &MainWindow::close);
-    });
 }
 
 MainWindow::~MainWindow()
@@ -41,14 +39,13 @@ MainWindow::~MainWindow()
     delete _w;
 }
 
-void MainWindow::newSettings()
+void MainWindow::setButton_click()
 {
     _w->setWindowModality(Qt::WindowModal);
     _w->show();
 }
 
-void MainWindow::showEvent(QShowEvent *event)
+void MainWindow::startButton_click()
 {
-    RunGuard::instance()->run();
-    QWidget::showEvent(event);
+
 }

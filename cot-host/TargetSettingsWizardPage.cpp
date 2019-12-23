@@ -6,7 +6,7 @@
 #include "ui_TargetSettingsWizardPage.h"
 #include "TcpSocket.h"
 #include "Utility.h"
-#include "SettingsEntity.h"
+#include "Settings.h"
 
 TargetSettingsWizardPage::TargetSettingsWizardPage(QWidget* parent) :
 	QWizardPage(parent),

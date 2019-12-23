@@ -17,10 +17,9 @@ public:
 	MainWindow(QWidget* parent=nullptr);
     ~MainWindow() override;
 
-private slots:
-    void newSettings();
-protected:
-    void showEvent(QShowEvent* event) override;
+public slots:
+    void buttonSet_click();
+
 private:
 	Ui::MainWindow* _ui;
 	TestSettingsWizard* _wizard;

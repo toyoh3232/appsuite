@@ -19,7 +19,7 @@ HEADERS +=  \
     Logger.h \
     NetworkInterface.h \
     RunGuard.h \
-    SettingsEntity.h \
+    Settings.h \
     TcpServer.h \
     TcpSocket.h \
     TextEditIODevice.h \
@@ -32,7 +32,7 @@ SOURCES +=  \
     Logger.cpp \
     NetworkInterface.cpp \
     RunGuard.cpp \
-    SettingsEntity.cpp \
+    Settings.cpp \
     TcpServer.cpp \
     TcpSocket.cpp \
     TextEditIODevice.cpp \

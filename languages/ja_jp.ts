@@ -68,20 +68,20 @@
         <translation>選択する</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="34"/>
-        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="35"/>
+        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="32"/>
+        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="32"/>
         <source>not necessary</source>
         <translation>入力必要なし</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="147"/>
-        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="149"/>
+        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="140"/>
+        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="140"/>
         <source>information</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="149"/>
-        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="151"/>
+        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="142"/>
+        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="142"/>
         <source>please wait for 3 secs...</source>
         <translation>3秒ほどお待ちください...</translation>
     </message>
@@ -95,54 +95,68 @@
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="27"/>
+        <location filename="../cot-target/MainWindow.ui" line="150"/>
         <source>Target</source>
         <translation>ターゲット</translation>
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="40"/>
-        <location filename="../cot-target/MainWindow.ui" line="40"/>
+        <location filename="../cot-target/MainWindow.ui" line="52"/>
         <source>Action</source>
         <translation>操作</translation>
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="55"/>
-        <location filename="../cot-target/MainWindow.ui" line="55"/>
+        <location filename="../cot-target/MainWindow.ui" line="67"/>
         <source>Settings</source>
         <translation>設定</translation>
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="62"/>
-        <location filename="../cot-target/MainWindow.ui" line="62"/>
+        <location filename="../cot-target/MainWindow.ui" line="77"/>
         <source>Start</source>
         <translation>開始</translation>
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="69"/>
-        <location filename="../cot-target/MainWindow.ui" line="69"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="76"/>
-        <location filename="../cot-target/MainWindow.ui" line="76"/>
+        <location filename="../cot-target/MainWindow.ui" line="84"/>
         <source>Exit</source>
         <translation>終了</translation>
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="93"/>
-        <location filename="../cot-target/MainWindow.ui" line="93"/>
+        <location filename="../cot-target/MainWindow.ui" line="101"/>
         <source>Log</source>
         <translation>ログ</translation>
     </message>
     <message>
-        <location filename="../cot-target/MainWindow.ui" line="14"/>
+        <location filename="../cot-target/MainWindow.ui" line="26"/>
         <source>On/Off Test Target Tool</source>
         <translation>On/Offテスト一括設定ツール（ターゲット側）</translation>
     </message>
     <message>
-        <location filename="../cot-target/MainWindow.ui" line="27"/>
+        <location filename="../cot-target/MainWindow.ui" line="39"/>
         <source>Host</source>
         <translation>ホスト</translation>
+    </message>
+    <message>
+        <location filename="../cot-target/MainWindow.ui" line="137"/>
+        <source>User/Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="../cot-host/cot-host.cpp" line="18"/>
+        <location filename="../cot-target/cot-target.cpp" line="18"/>
+        <source>Another instance is arealy running!</source>
+        <translation>すでに別のインスタンスが起動しています！</translation>
     </message>
 </context>
 <context>

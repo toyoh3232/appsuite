@@ -3,7 +3,7 @@
 
 #include <QtNetwork/QTcpSocket>
 
-#include "SettingsEntity.h"
+#include "Settings.h"
 
 class TcpSocket : public QObject
 {

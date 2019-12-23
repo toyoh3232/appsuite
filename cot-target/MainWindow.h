@@ -16,12 +16,11 @@ class MainWindow : public QMainWindow
 
 public:
 	MainWindow(QWidget* parent=nullptr);
-	~MainWindow();
+    ~MainWindow() override;
 
-private slots:
-	void newSettings();
-protected:
-    void showEvent(QShowEvent* event) override;
+public slots:
+    void setButton_click();
+    void startButton_click();
 
 private:
 	Ui::MainWindow* _ui;

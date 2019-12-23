@@ -34,8 +34,6 @@ private:
 	
 private:
 	Ui::HostSettingsWizardPage* _ui;
-	NetworkInterface* _interface;
-	QList<NetworkInterface> _interfaces;
 	
 };
 #endif//ONOFFSETTINGWIZARD_H

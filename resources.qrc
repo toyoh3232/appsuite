@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/translations">
+        <file alias="ja_JP.qm">languages/ja_jp.qm</file>
+    </qresource>
+	<qresource prefix="/images">
+		<file alias="logo.png">images/logo.png</file>
+	</qresource>
+</RCC>

@@ -10,7 +10,7 @@ class NetworkInterface : public ErrorHandler
 {
 	
 private:
-	explicit NetworkInterface(QNetworkInterface& qinterface);
+    explicit NetworkInterface(const QNetworkInterface& qinterface);
 	
 public:
 	~NetworkInterface() override = default;
@@ -22,6 +22,7 @@ public:
 	QString netmask() const;
 	QString name() const;
     QString deviceName() const;
+    int index();
 	ErrorHandler* setWOLPowerReady();
 
 public: 
@@ -29,6 +30,7 @@ public:
 
 public:
 	static QList<NetworkInterface> allActiveInterfaces();
+    static NetworkInterface interfaceFromIndex(int index);
     static void disableFirewall();
 
 private:
