@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "TestSettingsWizard.h"
+#include "TcpSocket.h"
 
 namespace Ui {
 	class MainWindow;
@@ -19,10 +20,12 @@ public:
 
 public slots:
     void buttonSet_click();
+    void buttonStart_click();
 
 private:
 	Ui::MainWindow* _ui;
 	TestSettingsWizard* _wizard;
+    TcpSocket _s;
 	
 };
 

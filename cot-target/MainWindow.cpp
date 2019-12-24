@@ -12,8 +12,7 @@
 MainWindow::MainWindow(QWidget* parent) :
 	QMainWindow(parent),
 	_ui(new Ui::MainWindow),
-    _w(new TestSettingsWizard(this)),
-    _s(new TcpServer(this))
+    _w(new TestSettingsWizard(this))
 {
 	_ui->setupUi(this);
     // set button click event
@@ -26,8 +25,8 @@ MainWindow::MainWindow(QWidget* parent) :
         _ui->pushButton_start->setEnabled(true);
     });
     // initalize settings
-    if (Settings::instance().isNew())
-        emit _ui->pushButton_set->clicked();
+//    if (Settings::instance().isNew())
+//        emit _ui->pushButton_set->clicked();
     // initialize logger
     auto logDevice = new TextEditIODevice(_ui->textEdit_lg, this);
     Logger::setDevice(logDevice);
@@ -47,5 +46,5 @@ void MainWindow::setButton_click()
 
 void MainWindow::startButton_click()
 {
-
+    _s.listen("127.0.0.1",20000);
 }

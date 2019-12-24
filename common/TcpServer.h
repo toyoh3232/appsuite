@@ -15,7 +15,7 @@ class TcpServer : public QObject
 public:
     TcpServer(QObject* parent=nullptr);
 public:
-    void listen(SettingsEntity local);
+    void listen(QString ip, quint16 port);
 
 public slots:
     void response();

@@ -8,6 +8,7 @@
 #include "RunGuard.h"
 
 
+
 MainWindow::MainWindow(QWidget* parent) :
 	QMainWindow(parent),
 	_ui(new Ui::MainWindow),
@@ -15,6 +16,7 @@ MainWindow::MainWindow(QWidget* parent) :
 {
 	_ui->setupUi(this);
     connect(_ui->pushButton_set,&QPushButton::clicked, this, &MainWindow::buttonSet_click);
+    connect(_ui->pushButton_start,&QPushButton::clicked, this, &MainWindow::buttonStart_click);
 	connect(_ui->pushButton_exit,&QPushButton::clicked, this, &QWidget::close);
     //initialize logger
     auto logDevice = new TextEditIODevice(_ui->textEdit_lg,this);
@@ -32,6 +34,20 @@ MainWindow::~MainWindow()
 void MainWindow::buttonSet_click()
 {
 	_wizard->setWindowModality(Qt::WindowModal);
-	_wizard->show();
+    _wizard->show();
+}
+
+void MainWindow::buttonStart_click()
+{
+    logger() << "clicked";
+    connect(&_s, &TcpSocket::arrived, this, []
+    {
+        foreach(auto& key, Settings::instance().entity().allKeys())
+        {
+            logger() << "start:" <<Settings::instance().entity()[key].toString();
+        }
+    });
+    _s.connectTo("127.0.0.1",20000);
+    _s.request(RequestType::ASK_INFOMATION);
 }
 

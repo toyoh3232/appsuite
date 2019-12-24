@@ -2,6 +2,7 @@
 #include <QUdpSocket>
 #include <QDataStream>
 #include "Logger.h"
+#include "Settings.h"
 
 #include "TcpSocket.h"
 
@@ -9,12 +10,13 @@ TcpSocket::TcpSocket() :
    _s(new QTcpSocket)
 {
     connect(_s, &QTcpSocket::connected, this,[]{logger() << "server connected";} );
-    connect(this,&TcpSocket::arrived,this, [](QString s){logger() << "data arrived" << s;});
+    connect(this,&TcpSocket::arrived,this, []{logger() << "data arrived";});
 }
 
-void TcpSocket::connectTo(SettingsEntity server)
+void TcpSocket::connectTo(QString ip, quint16 port)
 {
-    _s->connectToHost(QHostAddress(server.ip), server.port);
+    logger() << "connect to";
+    _s->connectToHost(QHostAddress(ip), port);
 }
 
 void TcpSocket::request(RequestType type)
@@ -25,18 +27,20 @@ void TcpSocket::request(RequestType type)
     _s->write(data);
     connect(_s, &QIODevice::readyRead,[=]
     {
+                logger() << "readyRead";
         QDataStream in(_s);
-        SettingsEntity e;
+        SettingsEntity se;
         in.startTransaction();
-        in >> e.os;
+        in >> se;
         if (!in.commitTransaction())
             return;
-        qDebug() << e.os;
-        emit arrived(e.os);
+        logger() << se["hostOS"].toString();
+        Settings::instance().entity().update(se);
+        emit arrived();
     });
 }
 
-void TcpSocket::sendWOL(SettingsEntity target, int timeOut)
+void TcpSocket::sendWOL(QString mac, int timeOut)
 {
 	// build magic packet
 	QByteArray magic;
@@ -46,7 +50,7 @@ void TcpSocket::sendWOL(SettingsEntity target, int timeOut)
 	}
 	for (int i=0;i<16;i++)
 	{
-		foreach(QString hex, target.mac.split('-'))
+        foreach(QString hex, mac.split('-'))
         {
             magic.append(static_cast<char>(hex.toInt(nullptr, 16)));
 		}

@@ -50,14 +50,14 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_st">
+       <widget class="QPushButton" name="pushButton_set">
         <property name="text">
          <string>Settings</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="pushButton_start">
         <property name="text">
          <string>Start</string>
         </property>

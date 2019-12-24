@@ -11,14 +11,14 @@ class TcpSocket : public QObject
 
 public:
     explicit TcpSocket();
-    void connectTo(SettingsEntity server);
+    void connectTo(QString ip, quint16 port);
     void request(RequestType type);
 
 signals:
-    void arrived(QString e);
+    void arrived();
 
 public:
-    static void sendWOL(SettingsEntity target, int timeOut);
+    static void sendWOL(QString mac, int timeOut);
 
 private:
     QTcpSocket* _s;

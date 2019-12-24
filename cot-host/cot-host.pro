@@ -3,7 +3,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 INCLUDEPATH += ../common
 DESTDIR = ../app
 
-RESOURCES += ../languages/translations.qrc
+RESOURCES += ../resources.qrc
 
 CONFIG(debug, debug|release) {
         LIBS += -L../common/debug

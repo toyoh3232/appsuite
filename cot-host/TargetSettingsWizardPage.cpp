@@ -49,13 +49,6 @@ void TargetSettingsWizardPage::dtButton_clicked()
         return;
     }
 	_ui->lineEdit_mac->setText(Utility::searchArp(_ui->lineEdit_ip->text()));
-    auto s = new TcpSocket();
-    SettingsEntity e;
-    e.ip = "127.0.0.1";
-//  e.ip = _ui->lineEdit_ip->text();
-    e.port = 20000;
-    s->connectTo(e);
-    connect(s, &TcpSocket::arrived, _ui->lineEdit_os, &QLineEdit::setText);
-    s->request(RequestType::ASK_INFOMATION);
+
 
 }

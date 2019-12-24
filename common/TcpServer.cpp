@@ -14,10 +14,10 @@ TcpServer::TcpServer(QObject* parent) :
 }
 
 
-void TcpServer::listen(SettingsEntity local)
+void TcpServer::listen(QString ip, quint16 port)
 {
-    _s->listen(QHostAddress(local.ip), local.port);
-    logger() << QString("starting server on %1:%2").arg(local.ip).arg(local.port);
+    _s->listen(QHostAddress(ip), port);
+    logger() << QString("starting server on %1:%2").arg(ip).arg(port);
 }
 
 void TcpServer::response()
@@ -39,12 +39,12 @@ void TcpServer::response()
         {
             case RequestType::ASK_INFOMATION:
                 logger() << "sending OS info";
-                in << QSysInfo::prettyProductName();
+                SettingsEntity se;
+                se["targetOS"] = QSysInfo::prettyProductName();
+                out << se;
                 break;
         }
         socket->write(data);
-        socket->close();
-        socket->deleteLater();
     });
 }
 

@@ -25,7 +25,7 @@ public slots:
 private:
 	Ui::MainWindow* _ui;
     TestSettingsWizard* _w;
-    TcpServer* _s;
+    TcpServer _s;
 	
 };
 

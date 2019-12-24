@@ -15,9 +15,17 @@ QDataStream& operator>> (QDataStream& stream, RequestType& type)
     return stream;
 }
 
+QDataStream& operator<< (QDataStream& stream, SettingsEntity& se)
+{
+    return stream << se._maps;
+}
 
-Settings::Settings():
-    _sets("Toshiba", QCoreApplication::applicationName())
+QDataStream& operator>> (QDataStream& stream, SettingsEntity& se)
+{
+    return stream >> se._maps;
+}
+
+SettingsEntity::SettingsEntity()
 {
 
 }
@@ -25,19 +33,53 @@ Settings::Settings():
 Settings& Settings::instance()
 {
     static Settings s;
+
     return s;
 }
 
-bool Settings::isNew()
+void Settings::save()
 {
-    if (_sets.value("isNew",QVariant(false)).toBool() == false)
-        return true;
-    return false;
+    QSettings set("Toshiba", QCoreApplication::applicationName());
+    auto keys = _se._maps.keys();
+    foreach(auto key, keys)
+    {
+        set.setValue(key, _se._maps[key]);
+    }
 }
-void Settings::save(SettingsEntity se)
+
+void Settings::load()
 {
-    _sets.setValue("isNew", true);
-    _sets.setValue("clientIP",se.ip);
-    _sets.setValue("ClientPort", se.port);
-    _sets.sync();
+    QSettings set("Toshiba", QCoreApplication::applicationName());
+    foreach(auto key, set.allKeys())
+    {
+        _se._maps.insert(key, set.value(key, QVariant()));
+    }
+}
+
+QStringList SettingsEntity::allKeys() const
+{
+    return _maps.keys();
+}
+
+void SettingsEntity::update(SettingsEntity& se)
+{
+    foreach(auto& key, se.allKeys())
+    {
+        _maps[key] = se[key];
+    }
+}
+
+QVariant& SettingsEntity::operator[](const QString& key)
+{
+    return _maps[key];
+}
+
+const QVariant SettingsEntity::operator[](const QString& key) const
+{
+    return _maps[key];
+}
+
+SettingsEntity& Settings::entity()
+{
+    return  _se;
 }

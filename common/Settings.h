@@ -4,6 +4,8 @@
 #include <QString>
 #include <QDataStream>
 #include <QSettings>
+#include <QVariant>
+#include <QStringList>
 
 enum class RequestType : qint16
 {
@@ -13,35 +15,48 @@ enum class RequestType : qint16
 QDataStream& operator<< (QDataStream& stream, RequestType type);
 QDataStream& operator>> (QDataStream& stream, RequestType& type);
 
-enum class ExperimentType
+
+class SettingsEntity
 {
-    FULLY_EQUIPPED_RUNNING,
-    ONOFF_LOOP_TEST
+public:
+    SettingsEntity();
+    SettingsEntity(SettingsEntity&) = delete;
+    SettingsEntity& operator=(SettingsEntity&) = delete;
+private:
+    QVariantMap _maps;
+
+public:
+    QStringList allKeys() const;
+    void update(SettingsEntity& se);
+    // setter
+    QVariant& operator[](const QString& key);
+    // getter
+    const QVariant operator[](const QString& key) const;
+    friend class Settings;
+    friend QDataStream& operator<< (QDataStream& stream, SettingsEntity& se);
+    friend QDataStream& operator>> (QDataStream& stream, SettingsEntity& se);
+
 };
 
-struct SettingsEntity
-{
-	
-	ExperimentType _type;
-	QString ip;
-	QString mac;
-	QString os;
-    quint16     port;
-	bool isWOLPowerOn;
-};
+QDataStream& operator<< (QDataStream& stream, SettingsEntity& se);
+QDataStream& operator>> (QDataStream& stream, SettingsEntity& se);
 
 class Settings
 {
 
-public:
-    Settings();
+private:
+    Settings() = default;
+    Settings(Settings&) = delete;
+    Settings& operator=(Settings&) = delete;
+
 public:
     static Settings& instance();
-    bool isNew();
-    void save(SettingsEntity se);
+    SettingsEntity& entity();
+    void save();
+    void load();
 
 private:
-    QSettings _sets;
+    SettingsEntity _se;
 };
 
 #endif // SETTINGS_H
