@@ -1,20 +1,22 @@
-#ifndef ONOFFSETTINGWIZARD_H
-#define ONOFFSETTINGWIZARD_H
+#ifndef IPSETTINGSWIZARDPAGE_H
+#define IPSETTINGSWIZARDPAGE_H
 
 #include <QWizardPage>
+
+#include "WizardPage.h"
 #include "NetworkInterface.h"
 
 namespace Ui {
-	class HostSettingsWizardPage;
+    class IpSettingsWizardPage;
 }
 
-class HostSettingsWizardPage : public QWizardPage
+class IpSettingsWizardPage : public WizardPage
 {
 	Q_OBJECT
 
 public:
-	explicit HostSettingsWizardPage(QWidget *parent = nullptr);
-    ~HostSettingsWizardPage() override;
+    explicit IpSettingsWizardPage(QWidget *parent = nullptr);
+    ~IpSettingsWizardPage() override;
 	
 public slots:
 	void lockButton_click();
@@ -33,7 +35,7 @@ private:
 	void setStyle(QWidget* parent, QString widgetClassName, QString style);
 	
 private:
-	Ui::HostSettingsWizardPage* _ui;
+    Ui::IpSettingsWizardPage* _ui;
 	
 };
-#endif//ONOFFSETTINGWIZARD_H
+#endif//IPSETTINGSWIZARDPAGE_H

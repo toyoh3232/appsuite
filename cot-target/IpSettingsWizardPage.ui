@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>HostSettingsWizardPage</class>
- <widget class="QWizardPage" name="HostSettingsWizardPage">
+ <class>IpSettingsWizardPage</class>
+ <widget class="QWizardPage" name="IpSettingsWizardPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -154,7 +154,7 @@
       <x>10</x>
       <y>20</y>
       <width>181</width>
-      <height>71</height>
+      <height>101</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_2">
@@ -196,6 +196,32 @@
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="lineEdit_oldsm">
+       <property name="whatsThis">
+        <string notr="true"/>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(240, 240, 240);</string>
+       </property>
+       <property name="inputMask">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string notr="true"/>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Mac address:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineEdit_mac">
        <property name="whatsThis">
         <string notr="true"/>
        </property>

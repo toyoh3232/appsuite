@@ -4,11 +4,13 @@
 #include <QWizardPage>
 #include <QWidget>
 
+#include "WizardPage.h"
+
 namespace Ui{
     class TargetSettingsWizardPage;
 }
 
-class TargetSettingsWizardPage : public QWizardPage
+class TargetSettingsWizardPage : public WizardPage
 {
 	Q_OBJECT
 

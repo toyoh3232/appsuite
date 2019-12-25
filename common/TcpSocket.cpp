@@ -1,16 +1,23 @@
 #include <QByteArray>
 #include <QUdpSocket>
 #include <QDataStream>
+#include <QWidget>
+#include <QMessageBox>
+
 #include "Logger.h"
 #include "Settings.h"
 
 #include "TcpSocket.h"
 
-TcpSocket::TcpSocket() :
-   _s(new QTcpSocket)
+TcpSocket::TcpSocket(QObject* parent) :
+    QObject(parent),
+  _s(new QTcpSocket(parent))
 {
     connect(_s, &QTcpSocket::connected, this,[]{logger() << "server connected";} );
     connect(this,&TcpSocket::arrived,this, []{logger() << "data arrived";});
+    // the new syntax for connecting fails due to overload function
+    connect(_s, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),this, &TcpSocket::errorHandle);
+
 }
 
 void TcpSocket::connectTo(QString ip, quint16 port)
@@ -34,9 +41,7 @@ void TcpSocket::request(RequestType type)
         in >> se;
         if (!in.commitTransaction())
             return;
-        logger() << se["hostOS"].toString();
-        Settings::instance().entity().update(se);
-        emit arrived();
+        emit arrived(se);
     });
 }
 
@@ -59,4 +64,18 @@ void TcpSocket::sendWOL(QString mac, int timeOut)
 	QUdpSocket udpSocket;
     udpSocket.writeDatagram(magic, QHostAddress::Broadcast, 45454);
     udpSocket.close();
+}
+
+void TcpSocket::errorHandle(QAbstractSocket::SocketError err)
+{
+    QWidget* w = qobject_cast<QWidget*> (parent());
+    switch (err)
+    {
+    default:
+        if (w != nullptr)
+            QMessageBox::information(w, tr("information"), tr("socket error"));
+    logger() << static_cast<int>(err);
+
+    }
+
 }

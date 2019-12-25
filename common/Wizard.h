@@ -5,7 +5,7 @@
 
 class Wizard : public QWizard
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
     explicit Wizard(QWidget* parent=nullptr);

@@ -29,19 +29,19 @@ RC_ICONS = icon.ico
 }
 
 SOURCES += \
-    HostSettingsWizardPage.cpp \
+    IpSettingsWizardPage.cpp \
     MainWindow.cpp \
     TargetSettingsWizardPage.cpp \
     TestSettingsWizard.cpp \
     cot-host.cpp
 
 HEADERS += \
-    HostSettingsWizardPage.h \
+    IpSettingsWizardPage.h \
     MainWindow.h \
     TargetSettingsWizardPage.h \
     TestSettingsWizard.h
 
 FORMS += \
-    HostSettingsWizardPage.ui \
+    IpSettingsWizardPage.ui \
     MainWindow.ui \
     TargetSettingsWizardPage.ui

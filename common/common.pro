@@ -24,7 +24,8 @@ HEADERS +=  \
     TcpSocket.h \
     TextEditIODevice.h \
     Utility.h \
-    Wizard.h
+    Wizard.h \
+    Wizardpage.h
     ErrorHandler.h
 
 SOURCES +=  \
@@ -37,5 +38,6 @@ SOURCES +=  \
     TcpSocket.cpp \
     TextEditIODevice.cpp \
     Utility.cpp \
-    Wizard.cpp
+    Wizard.cpp \
+    Wizardpage.cpp
     ErrorHandler.cpp

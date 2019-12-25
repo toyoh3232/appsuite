@@ -4,86 +4,134 @@
 <context>
     <name>HostSettingsWizardPage</name>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="26"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="26"/>
+        <source>On/Off Host Settings</source>
+        <translation type="vanished">On/Off ホスト側設定</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="vanished">新しい設定</translation>
+    </message>
+    <message>
+        <source>Set</source>
+        <translation type="vanished">設定する</translation>
+    </message>
+    <message>
+        <source>IP address:</source>
+        <translation type="vanished">IPアドレス：</translation>
+    </message>
+    <message>
+        <source>Subnet mask:</source>
+        <translation type="vanished">サブネットマスク：</translation>
+    </message>
+    <message>
+        <source>Default gateway:</source>
+        <translation type="vanished">ゲートウェイ：</translation>
+    </message>
+    <message>
+        <source>Fill Default Value</source>
+        <translation type="vanished">デフォルト値を入れる</translation>
+    </message>
+    <message>
+        <source>Current Settings</source>
+        <translation type="vanished">現在の設定</translation>
+    </message>
+    <message>
+        <source>Network Interfaces</source>
+        <translation type="vanished">ネットワークカード</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="vanished">選択する</translation>
+    </message>
+    <message>
+        <source>not necessary</source>
+        <translation type="vanished">入力必要なし</translation>
+    </message>
+    <message>
+        <source>information</source>
+        <translation type="vanished">情報</translation>
+    </message>
+    <message>
+        <source>please wait for 3 secs...</source>
+        <translation type="vanished">3秒ほどお待ちください...</translation>
+    </message>
+</context>
+<context>
+    <name>IpSettingsWizardPage</name>
+    <message>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="26"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="26"/>
         <source>On/Off Host Settings</source>
         <translation>On/Off ホスト側設定</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="41"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="41"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="41"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="41"/>
         <source>Settings</source>
-        <translation>新しい設定</translation>
+        <translation>新規設定値</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="56"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="56"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="56"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="56"/>
         <source>Set</source>
         <translation>設定する</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="72"/>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="164"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="72"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="164"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="72"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="164"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="72"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="164"/>
         <source>IP address:</source>
         <translation>IPアドレス：</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="92"/>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="193"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="92"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="193"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="92"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="193"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="92"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="193"/>
         <source>Subnet mask:</source>
         <translation>サブネットマスク：</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="112"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="112"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="112"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="112"/>
         <source>Default gateway:</source>
         <translation>ゲートウェイ：</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="132"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="132"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="132"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="132"/>
         <source>Fill Default Value</source>
         <translation>デフォルト値を入れる</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="149"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="149"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="149"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="149"/>
         <source>Current Settings</source>
-        <translation>現在の設定</translation>
+        <translation>現在設定値</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="229"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="229"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="229"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="255"/>
         <source>Network Interfaces</source>
         <translation>ネットワークカード</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.ui" line="260"/>
-        <location filename="../cot-target/HostSettingsWizardPage.ui" line="260"/>
+        <location filename="../cot-host/IpSettingsWizardPage.ui" line="260"/>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="286"/>
         <source>Select</source>
         <translation>選択する</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="32"/>
-        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="32"/>
+        <location filename="../cot-host/IpSettingsWizardPage.cpp" line="24"/>
+        <location filename="../cot-target/IpSettingsWizardPage.cpp" line="29"/>
         <source>not necessary</source>
         <translation>入力必要なし</translation>
     </message>
     <message>
-        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="140"/>
-        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="140"/>
-        <source>information</source>
-        <translation>情報</translation>
-    </message>
-    <message>
-        <location filename="../cot-host/HostSettingsWizardPage.cpp" line="142"/>
-        <location filename="../cot-target/HostSettingsWizardPage.cpp" line="142"/>
-        <source>please wait for 3 secs...</source>
-        <translation>3秒ほどお待ちください...</translation>
+        <location filename="../cot-target/IpSettingsWizardPage.ui" line="219"/>
+        <source>Mac address:</source>
+        <translation>MACアドレス:</translation>
     </message>
 </context>
 <context>
@@ -95,7 +143,7 @@
     </message>
     <message>
         <location filename="../cot-host/MainWindow.ui" line="27"/>
-        <location filename="../cot-target/MainWindow.ui" line="150"/>
+        <location filename="../cot-target/MainWindow.ui" line="153"/>
         <source>Target</source>
         <translation>ターゲット</translation>
     </message>
@@ -145,9 +193,9 @@
         <translation>ホスト</translation>
     </message>
     <message>
-        <location filename="../cot-target/MainWindow.ui" line="137"/>
+        <location filename="../cot-target/MainWindow.ui" line="140"/>
         <source>User/Password</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザー名/パスワード</translation>
     </message>
 </context>
 <context>
@@ -156,7 +204,7 @@
         <location filename="../cot-host/cot-host.cpp" line="18"/>
         <location filename="../cot-target/cot-target.cpp" line="18"/>
         <source>Another instance is arealy running!</source>
-        <translation>すでに別のインスタンスが起動しています！</translation>
+        <translation type="unfinished">すでに別のインスタンスが実行されています！</translation>
     </message>
 </context>
 <context>
@@ -211,14 +259,17 @@
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>TcpSocket</name>
     <message>
-        <location filename="../cot-host/TargetSettingsWizardPage.cpp" line="48"/>
-        <source>Information</source>
-        <translation type="unfinished"></translation>
+        <location filename="../common/TcpSocket.cpp" line="76"/>
+        <source>information</source>
+        <translation type="unfinished">情報</translation>
     </message>
     <message>
-        <location filename="../cot-host/TargetSettingsWizardPage.cpp" line="48"/>
-        <source>Target IP is not reachable</source>
+        <location filename="../common/TcpSocket.cpp" line="76"/>
+        <source>socket error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -266,6 +317,19 @@
         <location filename="../common/Wizard.cpp" line="19"/>
         <source>Finish</source>
         <translation>終了</translation>
+    </message>
+</context>
+<context>
+    <name>WizardPage</name>
+    <message>
+        <location filename="../common/Wizardpage.cpp" line="27"/>
+        <source>information</source>
+        <translation>情報</translation>
+    </message>
+    <message>
+        <location filename="../common/Wizardpage.cpp" line="29"/>
+        <source>please wait for </source>
+        <translation>お待ちください</translation>
     </message>
 </context>
 </TS>

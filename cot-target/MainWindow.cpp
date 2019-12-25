@@ -11,7 +11,7 @@
 
 MainWindow::MainWindow(QWidget* parent) :
 	QMainWindow(parent),
-	_ui(new Ui::MainWindow),
+    _ui(new Ui::MainWindow),
     _w(new TestSettingsWizard(this))
 {
 	_ui->setupUi(this);
@@ -24,10 +24,6 @@ MainWindow::MainWindow(QWidget* parent) :
         _ui->pushButton_set->setEnabled(false);
         _ui->pushButton_start->setEnabled(true);
     });
-    // initalize settings
-//    if (Settings::instance().isNew())
-//        emit _ui->pushButton_set->clicked();
-    // initialize logger
     auto logDevice = new TextEditIODevice(_ui->textEdit_lg, this);
     Logger::setDevice(logDevice);
 }
@@ -46,5 +42,14 @@ void MainWindow::setButton_click()
 
 void MainWindow::startButton_click()
 {
-    _s.listen("127.0.0.1",20000);
+    SettingsEntity se;
+    se["target_name"] = QSysInfo::productType();
+    se["target_os"] = QSysInfo::machineHostName();
+    se["target_ip"]  = _w->field("target_ip");
+    se["target_mac"] = _w->field("target_mac");
+
+    TcpServer* server = new TcpServer(this);
+    server->send(se);
+    server->listen("127.0.0.1",20000);
+    _ui->pushButton_start->setEnabled(false);
 }

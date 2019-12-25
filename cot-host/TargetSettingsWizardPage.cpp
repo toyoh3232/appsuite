@@ -9,22 +9,16 @@
 #include "Settings.h"
 
 TargetSettingsWizardPage::TargetSettingsWizardPage(QWidget* parent) :
-	QWizardPage(parent),
+    WizardPage(parent),
 	_ui(new Ui::TargetSettingsWizardPage)
 {
 	_ui->setupUi(this);
-	QString ipRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
-	QRegExp ipRegex ("^" + ipRange
-                 + "\\." + ipRange
-                 + "\\." + ipRange
-                 + "\\." + ipRange + "$");
-	QRegExpValidator *ipValidator = new QRegExpValidator(ipRegex, this);
-	_ui->lineEdit_ip->setValidator(ipValidator);
+
+    _ui->lineEdit_ip->setValidator(_ipValidator);
 	_ui->lineEdit_ip->setPlaceholderText("0.0.0.0");
 	
 	connect(_ui->lineEdit_ip, &QLineEdit::textChanged, this, &TargetSettingsWizardPage::lineEdit_textChanged);
 	connect(_ui->pushButton_dt, &QPushButton::clicked, this, &TargetSettingsWizardPage::dtButton_clicked);
-	
 }
 
 TargetSettingsWizardPage::~TargetSettingsWizardPage()
@@ -43,12 +37,17 @@ void TargetSettingsWizardPage::lineEdit_textChanged()
 
 void TargetSettingsWizardPage::dtButton_clicked()
 {
-    if (!Utility::isReachable(_ui->lineEdit_ip->text()))
+    waitingBox(2000);
+    TcpSocket* socket = new TcpSocket(this);
+    connect(socket, &TcpSocket::arrived, this, [=](SettingsEntity& se)
     {
-		QMessageBox::information(this, tr("Information"),tr("Target IP is not reachable"));
-        return;
-    }
-	_ui->lineEdit_mac->setText(Utility::searchArp(_ui->lineEdit_ip->text()));
-
+        _ui->lineEdit_os->setText(se["target_os"].toString());
+        _ui->lineEdit_mac->setText(se["target_mac"].toString());
+        _ui->lineEdit_iprt->setText(se["target_ip"].toString());
+        _ui->lineEdit_name->setText(se["target_name"].toString());
+        _ui->pushButton_dt->setEnabled(false);
+    });
+    socket->connectTo(_ui->lineEdit_ip->text(), 20000);
+    socket->request(RequestType::ASK_INFOMATION);
 
 }

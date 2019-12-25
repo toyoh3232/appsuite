@@ -21,6 +21,7 @@ public:
 public:
     Logger& operator<< (QString msg);
     Logger& operator<< (bool b);
+    Logger& operator<< (int i);
     Logger& operator<<(const char* c);
 	
 private:

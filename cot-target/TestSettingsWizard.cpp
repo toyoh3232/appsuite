@@ -5,12 +5,12 @@
 
 #include "TestSettingsWizard.h"
 
-#include "HostSettingsWizardPage.h"
+#include "IpSettingsWizardPage.h"
 
 TestSettingsWizard::TestSettingsWizard(QWidget* parent) : 
     Wizard(parent)
 {
-	setPage(Page_HostSettings, new HostSettingsWizardPage);
+    setPage(Page_HostSettings, new IpSettingsWizardPage);
 	
 	setStartId(Page_HostSettings);
 }

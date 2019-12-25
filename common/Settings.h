@@ -20,8 +20,6 @@ class SettingsEntity
 {
 public:
     SettingsEntity();
-    SettingsEntity(SettingsEntity&) = delete;
-    SettingsEntity& operator=(SettingsEntity&) = delete;
 private:
     QVariantMap _maps;
 
