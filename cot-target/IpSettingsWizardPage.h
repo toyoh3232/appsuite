@@ -1,8 +1,6 @@
 #ifndef IPSETTINGSWIZARDPAGE_H
 #define IPSETTINGSWIZARDPAGE_H
 
-#include <QWizardPage>
-
 #include "WizardPage.h"
 #include "NetworkInterface.h"
 

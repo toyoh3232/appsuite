@@ -1,19 +1,18 @@
-QT -= gui
+QT += core network gui
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QT += network
-
-CONFIG += c++11 console
+CONFIG += c++11
 CONFIG -= app_bundle
 
 CONFIG(debug, debug|release) {
-        LIBS += -L../common/debug
+#        LIBS += -L../common/debug
         TARGET = testd
-        LIBS += -lcommond
+#        LIBS += -lcommond
 		OBJECTS_DIR = debug
         } else {
         TARGET = test
-        LIBS += -L../common/release
-        LIBS += -lcommon
+#        LIBS += -L../common/release
+#        LIBS += -lcommon
 		OBJECTS_DIR = release
 }
 
@@ -41,4 +40,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        Controller.cpp \
+        FileCopyWidget.cpp \
+        MainWindow.cpp \
         main.cpp
+
+FORMS += \
+    FileCopyWidget.ui \
+    MainWindow.ui
+
+HEADERS += \
+    Controller.h \
+    FileCopyWidget.h \
+    MainWindow.h

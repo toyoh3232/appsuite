@@ -1,21 +1,13 @@
-#include <QCoreApplication>
-#include <QSettings>
-#include <QDebug>
-#include <QDataStream>
-#include <QFile>
+#include <QApplication>
+#include <QMessageBox>
 
-#include "TcpServer.h"
-#include "TcpSocket.h"
-#include "Settings.h"
+#include "MainWindow.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
-    if (argc > 2)
-    {
-        TcpServer s;
-        s.listen("127.0.0.1", 20000);
-        return app.exec();
-    }
+    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    QApplication app(argc, argv);
+    MainWindow w;
+    w.show();
+    return app.exec();
 }
-
