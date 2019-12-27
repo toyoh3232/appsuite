@@ -28,3 +28,8 @@ void FileCopyWidget::progressBar_dec()
     int v = _ui->progressBar->value();
     _ui->progressBar->setValue(v - 1);
 }
+
+void FileCopyWidget::setlabelText(QString text)
+{
+    _ui->label->setText(text);
+}

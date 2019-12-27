@@ -4,7 +4,8 @@
 #include <QFile>
 #include <QTextEdit>
 
-#include "Controller.h"
+#include "FileCopyThread.h"
+#include "FileCopyWidget.h"
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
@@ -14,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Controller* controler = new Controller;
+    FileCopyThreadController* controler = new FileCopyThreadController;
     connect(ui->pushButton_o, &QPushButton::clicked, this, [=]
             {
                 ui->lineEdit_o->setText(QFileDialog::getExistingDirectory(this, tr("Open Directory"),
@@ -31,9 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
             });
     connect(ui->pushButton_start, &QPushButton::clicked, controler,[=]
             {
+                QDir src(ui->lineEdit_o->text());
+                auto widget = new FileCopyWidget(src.entryList(QDir::Files).size(), this);
+                this->ui->verticalLayout->addWidget(widget);
+                connect(controler, &FileCopyThreadController::copyStarted, widget, &FileCopyWidget::setlabelText);
                 emit controler->operate(ui->lineEdit_o->text(), ui->lineEdit_n->text());
             });
-    connect(controler, &Controller::resultReady, ui->textEdit, &QTextEdit::setText);
 
 }
 

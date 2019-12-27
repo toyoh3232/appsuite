@@ -2,6 +2,7 @@
 #define FILECOPYWIDGET_H
 
 #include <QWidget>
+#include <QString>
 
 namespace Ui {
 class FileCopyWidget;
@@ -18,9 +19,12 @@ public:
 public slots:
     void label_update(const QString& caption);
 
-protected slots:
+public slots:
     void progressBar_inc();
     void progressBar_dec();
+
+public slots:
+    void setlabelText(const QString& text);
 
 signals:
     void update(const QString& caption);
