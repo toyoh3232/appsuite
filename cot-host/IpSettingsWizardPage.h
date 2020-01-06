@@ -19,9 +19,9 @@ public:
     ~IpSettingsWizardPage() override;
 	
 public slots:
-	void lockButton_click();
-	void lineEdit_textChanged();
-	void setButton_click();
+    void lockButton_click();
+    void lineEdit_textChange();
+    void setButton_click();
 	void fillButton_click();
 
 protected:

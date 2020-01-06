@@ -5,14 +5,14 @@ CONFIG += c++11
 CONFIG -= app_bundle
 
 CONFIG(debug, debug|release) {
-#        LIBS += -L../common/debug
+        LIBS += -L../common/debug
         TARGET = testd
-#        LIBS += -lcommond
+        LIBS += -lcommond
 		OBJECTS_DIR = debug
         } else {
         TARGET = test
-#        LIBS += -L../common/release
-#        LIBS += -lcommon
+        LIBS += -L../common/release
+        LIBS += -lcommon
 		OBJECTS_DIR = release
 }
 
@@ -40,16 +40,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        FileCopyThread.cpp \
-        FileCopyWidget.cpp \
+        FileCCDThread.cpp \
+        FileCCDWidget.cpp \
         MainWindow.cpp \
         main.cpp
 
 FORMS += \
-    FileCopyWidget.ui \
+    FileCCDWidget.ui \
     MainWindow.ui
 
 HEADERS += \
-    FileCopyThread.h \
-    FileCopyWidget.h \
+    FileCCDThread.h \
+    FileCCDWidget.h \
     MainWindow.h

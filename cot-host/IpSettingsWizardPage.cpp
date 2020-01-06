@@ -29,9 +29,9 @@ IpSettingsWizardPage::IpSettingsWizardPage(QWidget *parent) :
 	connect(_ui->pushButton_set, &QPushButton::clicked, this, &QWizardPage::completeChanged);
 	
     connect(_ui->pushButton_fill, &QPushButton::clicked, this, &IpSettingsWizardPage::fillButton_click);
-    connect(_ui->lineEdit_ip, &QLineEdit::textChanged, this, &IpSettingsWizardPage::lineEdit_textChanged);
-    connect(_ui->lineEdit_sm, &QLineEdit::textChanged, this, &IpSettingsWizardPage::lineEdit_textChanged);
-    connect(_ui->lineEdit_dg, &QLineEdit::textChanged, this, &IpSettingsWizardPage::lineEdit_textChanged);
+    connect(_ui->lineEdit_ip, &QLineEdit::textChanged, this, &IpSettingsWizardPage::lineEdit_textChange);
+    connect(_ui->lineEdit_sm, &QLineEdit::textChanged, this, &IpSettingsWizardPage::lineEdit_textChange);
+    connect(_ui->lineEdit_dg, &QLineEdit::textChanged, this, &IpSettingsWizardPage::lineEdit_textChange);
 }
 
 IpSettingsWizardPage::~IpSettingsWizardPage()
@@ -72,7 +72,7 @@ void IpSettingsWizardPage::lockButton_click()
 	setHidden(_ui->groupBox_oldset,false);
 }
 
-void IpSettingsWizardPage::lineEdit_textChanged()
+void IpSettingsWizardPage::lineEdit_textChange()
 {
 	bool valid1 = _ui->lineEdit_ip->hasAcceptableInput();
 	bool valid2 = _ui->lineEdit_sm->hasAcceptableInput();

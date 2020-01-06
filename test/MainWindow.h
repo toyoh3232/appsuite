@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "FileCCDWidget.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +19,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    FileCCDWidget* _widget;
 };
 
 #endif // MAINWINDOW_H
