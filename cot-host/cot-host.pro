@@ -31,6 +31,7 @@ RC_ICONS = icon.ico
 SOURCES += \
     IpSettingsWizardPage.cpp \
     MainWindow.cpp \
+    MultiTargetSettingsWidget.cpp \
     TargetSettingsWizardPage.cpp \
     TestSettingsWizard.cpp \
     cot-host.cpp
@@ -38,10 +39,12 @@ SOURCES += \
 HEADERS += \
     IpSettingsWizardPage.h \
     MainWindow.h \
+    MultiTargetSettingsWidget.h \
     TargetSettingsWizardPage.h \
     TestSettingsWizard.h
 
 FORMS += \
     IpSettingsWizardPage.ui \
     MainWindow.ui \
+    MultiTargetSettingsWidget.ui \
     TargetSettingsWizardPage.ui

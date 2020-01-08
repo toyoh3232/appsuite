@@ -43,13 +43,19 @@ SOURCES += \
         FileCCDThread.cpp \
         FileCCDWidget.cpp \
         MainWindow.cpp \
+        MainWindow2.cpp \
+        MultiTargetSettingsWidget.cpp \
         main.cpp
 
 FORMS += \
     FileCCDWidget.ui \
-    MainWindow.ui
+    MainWindow.ui \
+    MainWindow2.ui \
+    MultiTargetSettingsWidget.ui
 
 HEADERS += \
     FileCCDThread.h \
     FileCCDWidget.h \
-    MainWindow.h
+    MainWindow.h \
+    MainWindow2.h \
+    MultiTargetSettingsWidget.h

@@ -14,6 +14,6 @@ TestSettingsWizard::TestSettingsWizard(QWidget* parent) :
     setPage(Page_HostSettings, new IpSettingsWizardPage);
 	setPage(Page_TargetSettings, new TargetSettingsWizardPage);
 	
-	setStartId(Page_HostSettings);
+    setStartId(Page_TargetSettings);
 }
 
