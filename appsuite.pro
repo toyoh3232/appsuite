@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
-SUBDIRS = common cot-host cot-target test
+SUBDIRS = common cot-host cot-target test \
+    dhcp-server
 cot-host.depends = common
 cot-target.depends = common
 test.depends = common
