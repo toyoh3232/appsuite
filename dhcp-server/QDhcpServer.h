@@ -2,32 +2,41 @@
 #define QDHCPSERVER_H
 
 #include <QtGlobal>
+#include <QObject>
+#include <QUdpSocket>
+#include <QHostAddress>
 
 struct DhcpPacket
 {
-    quint8 op;
-    quint8 htype;
-    quint8 hlen;
-    quint8 hops;
-    quint8 xid[4];
-    quint8 secs[2];
-    quint8 _unused1[2];
-    quint8 ciaddr[4];
-    quint8 yiaddr[4];
-    quint8 siaddr[4];
-    quint8 giaddr[4];
-    quint8 chaddr[16];
-
-
-
-
-
+    uchar op;
+    uchar htype;
+    uchar hlen;
+    uchar hops;
+    uchar xid[4];
+    uchar secs[2];
+    uchar flags[2];
+    uchar ciaddr[4];
+    uchar yiaddr[4];
+    uchar siaddr[4];
+    uchar giaddr[4];
+    uchar chaddr[16];
+    uchar sname[64];
+    uchar file[128];
+    uchar options[312];
 };
 
-class QDhcpServer
+class QDhcpServer : public QObject
 {
 public:
-    QDhcpServer();
+    QDhcpServer(QObject* parent=nullptr);
+    ~QDhcpServer();
+
+public:
+    bool bind(const QHostAddress& address);
+    void listen();
+
+private:
+    QUdpSocket* socket;
 };
 
 #endif // QDHCPSERVER_H
