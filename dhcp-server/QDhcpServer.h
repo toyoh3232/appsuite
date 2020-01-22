@@ -6,12 +6,55 @@
 #include <QUdpSocket>
 #include <QHostAddress>
 
+
+class DhcpPacketEntity
+{
+    enum Opcode
+    {
+        BootRequest,
+        BootReply
+    };
+
+    enum HardwareType
+    {
+        Ethernet,
+        ExperimentalEthernet,
+        AmateurRadioAX_25
+        /*others*/
+    };
+    typedef struct tag_header
+    {
+        uchar op;
+        uchar htype;
+        uchar hlen;
+        uchar hops;
+    } Header;
+
+public:
+    DhcpPacketEntity(DhcpPacketEntity& old);
+    DhcpPacketEntity& operator=(const DhcpPacketEntity& old) = delete;
+private:
+    DhcpPacketEntity();
+public:
+    void setYourAddres(const QHostAddress& address);
+    void setServerAddr(const QHostAddress& address);
+    QHostAddress clientAddr();
+    QHostAddress yourAddr();
+    QHostAddress serverAddr();
+    QString clientHardwareAddr();
+    uqint8 hardwareAddrLength();
+
+private:
+    QHostAddress m_clientaddr;
+    QHostAddress m_youraddr;
+    QHostAddress m_serveraddr;
+
+};
+
+
 struct DhcpPacket
 {
-    uchar op;
-    uchar htype;
-    uchar hlen;
-    uchar hops;
+
     uchar xid[4];
     uchar secs[2];
     uchar flags[2];

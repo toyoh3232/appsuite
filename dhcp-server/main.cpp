@@ -9,5 +9,7 @@ int main(int argc, char *argv[])
     QDhcpServer server;
     qDebug() << server.bind(QHostAddress("127.0.0.1"));
     server.listen();
+    DhcpPacketEntity e;
+    e.number();
     return a.exec();
 }
